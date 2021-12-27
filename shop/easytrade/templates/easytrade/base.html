@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'easytrade/css/bootstrap.css' %}"  >
+    <link rel="stylesheet" href="{% static 'easytrade/css/header.css' %}"  >
+    <link rel="stylesheet" href="{% static 'easytrade/css/good.css' %}"  >
+    <link rel="stylesheet" href="{% static 'easytrade/css/basket.css' %}"  >
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+<body>
+  <header class="bottom-line">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-1">
+            <nav id="slow_nav">
+                <img src="{% static 'easytrade/images/menu.png' %}" class="menu" alt="">
+                <div class="menu">
+                <div class="row">
+
+                   {% for  category in categories %}
+                    <div class="col-4">
+                        <ul>
+                            <li><a href="#">{{category.name}}</a></li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+                </div>
+            </nav>
+        </div>
+        <div class="col-2">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'easytrade/images/logo.png' %} " class="logo" alt="">
+            </a>
+        </div>
+        <div class="col-7">
+          <form action="">
+            <div class="find">
+              <input type="text" name="find" id="find">
+              <div class="button">
+                <button type="submit" class="btn"></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-2">
+            <a href="{% url 'basket' %}" class="basket">
+                <img src="{% static 'easytrade/images/backet.png' %}" alt="">
+            </a>
+            {% if user.is_superuser %}
+            <a href="{% url 'admin:index' %}" class="basket">
+                <img src="{% static 'easytrade/images/admin.jpg' %}" alt="">
+            </a>
+             <a href="{% url 'filldb' %}" class="basket">
+                <img src="{% static 'easytrade/images/admin.jpg' %}" alt="">
+            </a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+    {% block content %}
+    {% endblock %}
+    <footer>
+
+        <div class="container">
+            <row>
+                <div class="col-6">
+                    <h3 class="acsent-color bold">Магазин</h3>
+                    <p>Персональний розділ</p>
+                    <p><i class='far fa-clock icon'></i> Час роботи: Пн-Пт: 09.00 - 17.00</p>
+                    <p><i class='fas fa-mobile-alt icon'></i> Телефон: +38 067-89-88-077</p>
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+
+                </div>
+            </row>
+        </div>
+    </footer>
+
+</body>
+ <script src="{% static 'easytrade/js/jquery-3.6.0.js' %}" type="text/javascript"></script>
+ <script src="{% static 'easytrade/js/good.js' %}" type="text/javascript"></script>
+ <script src="{% static 'easytrade/js/menu.js' %}" type="text/javascript"></script>
+</html>

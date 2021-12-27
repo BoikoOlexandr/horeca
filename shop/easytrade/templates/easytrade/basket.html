@@ -1,0 +1,41 @@
+
+{% extends 'easytrade/base.html' %}
+{% block content %}
+     <article class="basket">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="order-list">
+                        Список замовлених товарів
+                        {% for order in basket %}
+                        <div class="order">
+                            <div class="row">
+                                <div class="col-1">
+                                    <div class="image">
+                                        <img src="{{ order.good.photo.url }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex flex-column justify-content-center column">
+                                        <p class="">{{ order.good }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <div class="d-flex flex-column justify-content-center column">
+                                        <p class=""> {{ order.good.price }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <div class="d-flex flex-column justify-content-center column">
+                                        <p class=""> {{ order.number_of_goods }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

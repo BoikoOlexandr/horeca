@@ -1,0 +1,58 @@
+{% extends 'easytrade/base.html' %}
+{% block content %}
+    <div class="main-slider d-flex flex-column justify-content-center">
+        <h2 class="p-2 align-self-center slider-item">Заголовок</h2>
+        <p class="p-2 align-self-center slider-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A blanditiis consequatur delectus deleniti dolorem doloribus ducimus, ea id incidunt iusto laborum nam, nesciunt, nihil obcaecati odit officiis possimus praesentium voluptas.</p>
+        <div class="p-2 align-self-center bth slider-item slider-btn">Про нас</div>
+    </div>
+
+    <article>
+        <div class="container">
+            <div class="trends">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>
+                            Популярне
+                        </h1>
+                    </div>
+                    {% for good in popular %}
+                    <a href="{% url 'good' good.slug %}" class="col-3">
+                        <div class="good">
+<!--                            <div class="special">Спеціальна пропозиція</div>-->
+                            <div class="image"><img src="{{ good.photo.url }}" alt=""></div>
+                            <p class="title">{{ good }}</p>
+                            <p class="price">{{ good.price }} грн.</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="spliter d-flex flex-column justify-content-center">
+            <h2 class="p-2 align-self-center">Доставка швидко та зручним для вас способом!</h2>
+            <p class="p-2 align-self-center">Ви робите покупки, а ми з любов'ю доставляємо ваше замовлення у будь-який куточок нашої батьківщини</p>
+        </div>
+        <div class="container">
+            <div class="trends">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>
+                            Тренди сезону
+                        </h1>
+                    </div>
+
+                    {% for good in trends %}
+                    <a href="{% url 'good' good.slug %}" class="col-3">
+                        <div class="good">
+<!--                            <div class="special">Спеціальна пропозиція</div>-->
+                            <div class="image"><img src="{{ good.photo.url }}" alt=""></div>
+                            <p class="title">{{ good }}</p>
+                            <p class="price">{{ good.price }} грн.</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

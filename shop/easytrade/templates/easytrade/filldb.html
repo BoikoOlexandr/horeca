@@ -1,0 +1,14 @@
+
+{% extends 'easytrade/base.html' %}
+{% block content %}
+ <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+     {{form}}
+    <button type="submit">Upload</button>
+ </form>
+{% for key, value in temp.items %}
+<p>
+    {{key}} {{value}}
+</p>
+{% endfor %}
+{% endblock %}
