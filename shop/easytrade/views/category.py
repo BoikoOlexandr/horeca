@@ -17,11 +17,11 @@ class CategoryView(View, ViewMixIn):
 
     def get_goods(self, cat):
         if not cat or cat == 'all':
-            self.content['category_name'] = 'Всі товари'
+            self.content['page_name'] = 'Всі товари'
             return Goods.objects.filter(is_published=True)
         else:
             cat = Categories.objects.get(slug=cat)
-            self.content['category_name'] = cat.name
+            self.content['page_name'] = cat.name
             return Goods.objects.filter(is_published=True, category=cat)
 
     def set_pagination(self, request, category):

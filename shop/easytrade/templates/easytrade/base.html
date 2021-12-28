@@ -36,12 +36,14 @@
             </a>
         </div>
         <div class="col-7">
-          <form action="">
+          <form action="{% url 'search'%}">
             <div class="find">
+              <form action="" method="get">
               <input type="text" name="find" id="find">
               <div class="button">
                 <button type="submit" class="btn"></button>
               </div>
+              </form>
             </div>
           </form>
         </div>
