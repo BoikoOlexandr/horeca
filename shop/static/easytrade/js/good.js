@@ -1,10 +1,10 @@
-let count = 0
-let Price = Number(prise.textContent)
+let count = 1
+let Price = parseFloat(prise.textContent.replace(',', '.'))
 
 minus.onclick = function() {
-    if (count > 0) count -= 1
+    if (count > 1) count -= 1
     countresult.innerHTML = count
-    sum.innerHTML = count*Price
+    sum.innerHTML = Price * count
     result.value = count
 
 };
@@ -12,6 +12,7 @@ minus.onclick = function() {
 plus.onclick = function() {
     count += 1
     countresult.innerHTML = count
-    sum.innerHTML = count*Price
+    sum.innerHTML = Price * count
     result.value = count
 };
+

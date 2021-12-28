@@ -5,38 +5,15 @@ a{
 :root {
     --main-text-color: #a7a7a7;
     --acsent-text-color: #F7B70B;
+    --bacground-text-color: #221F1F
 }
 
 *{
-    font-family: "Open Sans",Helvetica,Arial,sans-serif;
     font-size: 15px;
     color: var(--main-text-color);
+
 }
 
-.telephone{
-    padding: 10px;
-}
-
-header .icon{
-    padding: 0 10px;
-    float: left;
-}
-
-header .info{
-    float: left;
-}
-header .title{
-    font-size: 0.8em;
-    text-transform: uppercase;
-}
-
-header .value:hover{
-    text-decoration: underline;
-}
-
-.schedule{
-    padding: 10px;
-}
 
 .bottom-line{
     border-bottom: #eee 1px solid;
@@ -65,6 +42,8 @@ i.icon{
 }
 
 .find input{
+    width: 80%;
+    height: 40px;
     display: block;
     float: left;
 }
@@ -79,11 +58,16 @@ i.icon{
     position: relative;
     right: 2px;
     min-width: 35px;
-    height: 28.5px;
+    height: 40px;
     background-color: var(--acsent-text-color);
     border-radius: 0;
 }
 
+header{
+    width: 100%;
+    position: fixed;
+    background: #221F1F;
+}
 header form ::after{
     content: "";
     display: block;
@@ -95,9 +79,10 @@ header form{
     padding: 10px;
 }
 
-nav .logo{
+header .logo{
     display: block;
     float: left;
+    padding: 10px;
     max-height: 58px;
 
 }
@@ -109,22 +94,21 @@ nav .logo{
     width: 100%;
 }
 
-.menu{
-    height: 58px;
-}
-.menu .nav-item{
-    font-size: 0.7em;
-    cursor: pointer;
-    text-transform: uppercase;
+a.basket{
+    text-align: right;
+    display: block;
 }
 
-.menu .nav-item:hover{
-    color: var(--acsent-text-color)
+a.basket img{
+    display: block;
+    float: right;
+    height: 50px;
+    width: 50px
 }
 
 .main-slider{
-    height: 528px;
-    background: black;
+    height: 200px;
+    background:     var(--bacground-text-color);
 }
 
 .slider-item{
@@ -155,6 +139,7 @@ h2.slider-item{
  h1::after{
     content: "";
     position: relative;
+    z-index: -4;
     bottom: -10px;
     display: block;
     width: 70px;
@@ -162,24 +147,6 @@ h2.slider-item{
     background: var(--acsent-text-color);
 }
 
- .why-we{
-     background: #f7f7f7;
-     padding: 30px;
- }
-
- .why-we .item{
-    padding: 10px;
-
-}
-
- .why-we .item i{
-    color: var(--acsent-text-color);
-    font-size: 3em;
-    text-align: center;
-}
- .why-we .item .text{
-    color: black;
-}
 .trends .good{
     height: 370px;
     text-align: center;
@@ -207,7 +174,7 @@ h2.slider-item{
 }
 
 article .spliter{
-    background: black;
+    background: #221F1F;
     text-align: center;
     height: 150px;
 }
@@ -220,4 +187,57 @@ footer{
     padding: 50px;
     background: #000;
     color: white;
+}
+
+
+
+article{
+    padding-top: 60px;
+    min-height: 100vmin;
+}
+
+#slow_nav{
+   position: absolute;
+}
+
+#slow_nav  img.menu{
+    padding: 10px;
+    max-width:60px;
+    max_height: 60px;
+    background: none
+}
+
+#slow_nav  ul{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 500px;
+    margin:0;
+    padding: 0;
+    display: none;
+}
+
+#slow_nav  ul > li{
+    list-style: none;
+    display: block;
+    position:relative;
+    margin-bottom: 5px;
+    padding:0;
+}
+
+#slow_nav a{text-decoration:none;}
+
+#slow_nav  ul > li > a{
+    font-size:18px;
+    padding:5px;
+    color:#fff;
+}
+
+#slow_nav  ul > li > a:hover{
+   color: var(--acsent-text-color);
+}
+
+
+#slow_nav .menu{
+    background-color:#333;
 }
