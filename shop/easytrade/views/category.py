@@ -20,7 +20,7 @@ class CategoryView(View, ViewMixIn):
             self.content['category_name'] = 'Всі товари'
             return Goods.objects.filter(is_published=True)
         else:
-            cat = Categories.objects.get(name=cat)
+            cat = Categories.objects.get(slug=cat)
             self.content['category_name'] = cat.name
             return Goods.objects.filter(is_published=True, category=cat)
 

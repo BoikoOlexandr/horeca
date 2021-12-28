@@ -1,4 +1,5 @@
 import django.db.models as models
+from django_extensions.db.fields import AutoSlugField as autoSlugField
 
 
 class Goods(models.Model):
@@ -68,6 +69,7 @@ class Status(models.Model):
 
 class Categories(models.Model):
     name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
 
     def __str__(self):
         return self.name

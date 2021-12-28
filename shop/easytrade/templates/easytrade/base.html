@@ -19,11 +19,10 @@
                 <img src="{% static 'easytrade/images/menu.png' %}" class="menu" alt="">
                 <div class="menu">
                 <div class="row">
-
                    {% for  category in categories %}
                     <div class="col-4">
                         <ul>
-                            <li><a href="#">{{category.name}}</a></li>
+                            <li><a href="{% url 'cat' category.slug %}">{{category.name}}</a></li>
                         </ul>
                     </div>
                     {% endfor %}

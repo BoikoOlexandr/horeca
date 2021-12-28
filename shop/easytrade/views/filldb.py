@@ -1,6 +1,7 @@
 import os.path
 
 import django.db.models as models
+from django.db import IntegrityError
 from openpyxl import load_workbook
 from django.contrib.sites import requests
 from django.shortcuts import render, redirect
@@ -10,6 +11,17 @@ from easytrade.forms.upload import UploadFileForm
 from easytrade.models import Goods, Orders, Measure, Categories, GoodTypes
 from easytrade.views.ViewMixIn import ViewMixIn
 from shop.settings import MEDIA_ROOT
+from django.template.defaultfilters import slugify as django_slugify
+
+alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
+            'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+            'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ы': 'i', 'э': 'e', 'ю': 'yu',
+            'я': 'ya'}
+def slugify(s):
+    """
+    Overriding django slugify that allows to use russian words as well.
+    """
+    return django_slugify(''.join(alphabet.get(w, w) for w in s.lower()))
 
 
 class FillDb(View, ViewMixIn):
@@ -84,9 +96,10 @@ class FillDb(View, ViewMixIn):
             return model.objects.get(name='unknown')
         try:
             instance = model.objects.get(name=value)
-        except model.DoesNotExist:
+        except (model.DoesNotExist, IntegrityError):
             instance = model()
             instance.name = value
+            instance.slug = slugify(value)
             instance.save()
         return instance
 

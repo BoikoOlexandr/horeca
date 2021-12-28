@@ -64,6 +64,8 @@ i.icon{
 }
 
 header{
+    width: 100%;
+    position: fixed;
     background: #221F1F;
 }
 header form ::after{
@@ -187,6 +189,12 @@ footer{
     color: white;
 }
 
+
+
+article{
+    padding-top: 60px;
+    min-height: 100vmin;
+}
 
 #slow_nav{
    position: absolute;
