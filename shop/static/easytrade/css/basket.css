@@ -1,0 +1,26 @@
+article.basket  .image{
+    text-align: center;
+}
+
+article.basket .image img{
+    max-height: 50px;
+    max-width: 50px;
+}
+article.basket .column{
+    height: 100%;
+}
+
+article.basket .column p{
+    margin: 0;
+    padding: 0;
+}
+article.basket .order-list{
+    border: 1px solid var(--main-text-color);
+    padding: 5px;
+}
+
+article.basket .order-list .order{
+    border: 1px solid black;
+    padding: 2px;
+    margin: 2px;
+}

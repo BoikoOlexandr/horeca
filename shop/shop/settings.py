@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-#d)scr%gn@g5#*9!39b)zygl*-&&66*@-pl#w96g34brkmrlx#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = [
@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'easytrade.apps.EasytradeConfig',
-    'novaposhta'
+    'easytrade.apps.EasytradeConfig'
 ]
 
 MIDDLEWARE = [
@@ -129,5 +128,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-NOVA_POSHTA_API_KEY = 'd1473a3d33d0493fc989997001ba0554'
