@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from easytrade.models import Categories
+from easytrade.models import SuperCategory
 
 
 class ViewMixIn(metaclass=ABCMeta):
@@ -14,4 +15,7 @@ class ViewMixIn(metaclass=ABCMeta):
         return f'easytrade/{self.template_name}.html'
 
     def set_menu(self):
+        self.content['super_categories'] = SuperCategory.objects.all()
         self.content['categories'] = Categories.objects.all()
+
+
