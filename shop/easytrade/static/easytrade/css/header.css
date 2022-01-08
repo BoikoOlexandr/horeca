@@ -5,13 +5,13 @@ a{
 :root {
     --main-text-color: #a7a7a7;
     --acsent-text-color: #F7B70B;
-    --bacground-text-color: #221F1F
+    --background-main-color: #221F1F;
 }
 
 *{
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
     font-size: 15px;
     color: var(--main-text-color);
-
 }
 
 
@@ -38,7 +38,16 @@ i.icon{
 
 .acsent-color{
     color: var(--acsent-text-color);
+}
 
+.background-color{
+    background: var(--background-main-color);
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    height: 60px;
 }
 
 .find input{
@@ -59,15 +68,12 @@ i.icon{
     right: 2px;
     min-width: 35px;
     height: 40px;
+    color: white;
     background-color: var(--acsent-text-color);
     border-radius: 0;
+    font-weight: bold;
 }
 
-header{
-    width: 100%;
-    position: fixed;
-    background: #221F1F;
-}
 header form ::after{
     content: "";
     display: block;
@@ -80,10 +86,7 @@ header form{
 }
 
 header .logo{
-    display: block;
-    float: left;
-    padding: 10px;
-    max-height: 58px;
+   max-height: 58px;
 
 }
 
@@ -108,7 +111,6 @@ a.basket img{
 
 .main-slider{
     height: 200px;
-    background:     var(--bacground-text-color);
 }
 
 .slider-item{
@@ -139,11 +141,11 @@ h2.slider-item{
  h1::after{
     content: "";
     position: relative;
-    z-index: -4;
     bottom: -10px;
     display: block;
     width: 70px;
     height: 8px;
+     z-index: -99;
     background: var(--acsent-text-color);
 }
 
@@ -170,11 +172,16 @@ h2.slider-item{
     padding: 0 10px;
     position: absolute;
     color: white;
+    z-index: -99;
     font-size: 0.7em;
 }
 
+article{
+    min-height: 100vh;
+    padding-top: 60px;
+}
+
 article .spliter{
-    background: #221F1F;
     text-align: center;
     height: 150px;
 }
@@ -191,53 +198,21 @@ footer{
 
 
 
-article{
-    padding-top: 60px;
-    min-height: 100vmin;
+nav.pagination-button{
+    margin-top: 20px;
+}
+nav.pagination-button p{
+    color: black;
+    background: var(--main-text-color);
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 100%;
 }
 
-#slow_nav{
-   position: absolute;
+nav.pagination-button p:hover{
+    cursor: pointer;
+    background: #777777;
 }
-
-#slow_nav  img.menu{
-    padding: 10px;
-    max-width:60px;
-    max_height: 60px;
-    background: none
-}
-
-#slow_nav  ul{
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 500px;
-    margin:0;
-    padding: 0;
-    display: none;
-}
-
-#slow_nav  ul > li{
-    list-style: none;
-    display: block;
-    position:relative;
-    margin-bottom: 5px;
-    padding:0;
-}
-
-#slow_nav a{text-decoration:none;}
-
-#slow_nav  ul > li > a{
-    font-size:18px;
-    padding:5px;
-    color:#fff;
-}
-
-#slow_nav  ul > li > a:hover{
-   color: var(--acsent-text-color);
-}
-
-
-#slow_nav .menu{
-    background-color:#333;
+nav.pagination-button p#current-page{
+    background: var(--acsent-text-color);
 }

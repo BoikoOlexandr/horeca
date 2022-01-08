@@ -1,0 +1,76 @@
+article.good .photo{
+    text-align: center;
+    padding: 50px 0;
+}
+article.good .price-box{
+    width: 250px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+article.good .price-box p.price{
+    font-weight: bold;
+    color: #6d0000;
+    font-size: 2em;
+}
+
+#prise{
+    font-weight: bold;
+    color: #7e0202;
+    font-size: 2.1em;
+}
+
+article.good .price-box p{
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+}
+
+article.good .price-box .count-button{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: var(--main-text-color);
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+article.good .price-box p.count{
+    font-size: 1em;
+    width: 50px;
+    display: inline-block;
+}
+
+article.good .price-box .price-box-btn{
+    width: 80%;
+    padding: 5px;
+    border: 0;
+    margin: 20px auto;
+    text-transform: uppercase;
+    background: var(--acsent-text-color);
+    font-size: 0.8em;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+}
+
+nav.pagination-button{
+    margin-top: 20px;
+}
+nav.pagination-button a{
+    color: black;
+    background: var(--main-text-color);
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 100%;
+}
+
+nav.pagination-button a:hover{
+    cursor: pointer;
+    background: #777777;
+}
+nav.pagination-button a#current-page{
+    background: var(--acsent-text-color);
+}

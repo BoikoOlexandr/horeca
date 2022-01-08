@@ -55,6 +55,10 @@ class Orders(models.Model):
 class Baskets(models.Model):
     status = models.CharField(max_length=50)
     orders = models.ManyToManyField('Orders')
+    address = models.CharField(max_length=400, default='')
+    description = models.CharField(max_length=400, default='')
+    telephone = models.CharField(max_length=15, default='')
+    user_name = models.CharField(max_length=20, default='')
 
     def __str__(self):
         return str(self.pk)
@@ -70,6 +74,11 @@ class Status(models.Model):
 class Categories(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
+    super_category = models.ForeignKey(
+        'SuperCategory',
+        on_delete=models.CASCADE,
+        default=1
+    )
 
     def __str__(self):
         return self.name
@@ -84,6 +93,14 @@ class Measure(models.Model):
 
 class GoodTypes(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class SuperCategory(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.FileField(upload_to='uploads/supercategory/')
 
     def __str__(self):
         return self.name

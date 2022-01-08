@@ -5,6 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    {% if basket %}
                     <div class="order-list">
                         Список замовлених товарів
                         {% for order in basket %}
@@ -34,6 +35,19 @@
                         </div>
                         {% endfor %}
                     </div>
+                    <form id="basket" action="{% url 'basket' %}">
+                        <label for="description">Опис</label>
+                        <input id="description" name="description" type="text">
+                        <label for="address">Адреса</label>
+                        <input id="address" name="address" type="text" required>
+                        <label for="telephone">Телефон</label>
+                        <input id="telephone" name="telephone" type="tel" pattern="[0-9]{10}" required>
+                        <input type="hidden" value="1" name="save">
+                        <input type="submit">
+                    </form>
+                    {% else %}
+                    <h1>Немає обраних товарів</h1>
+                    {% endif %}
                 </div>
             </div>
         </div>

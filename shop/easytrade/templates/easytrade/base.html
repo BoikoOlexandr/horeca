@@ -3,32 +3,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ho re ca Shop</title>
     <link rel="stylesheet" href="{% static 'easytrade/css/bootstrap.css' %}"  >
     <link rel="stylesheet" href="{% static 'easytrade/css/header.css' %}"  >
     <link rel="stylesheet" href="{% static 'easytrade/css/good.css' %}"  >
     <link rel="stylesheet" href="{% static 'easytrade/css/basket.css' %}"  >
+    <link rel="stylesheet" href="{% static 'easytrade/css/slider.css' %}"  >
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
-  <header class="bottom-line">
+  <header class="bottom-line background-color">
     <div class="container-fluid">
       <div class="row">
+
         <div class="col-1">
+           <div class="col-1">
             <nav id="slow_nav">
                 <img src="{% static 'easytrade/images/menu.png' %}" class="menu" alt="">
-                <div class="menu">
-                <div class="row">
-                   {% for  category in categories %}
-                    <div class="col-4">
-                        <ul>
-                            <li><a href="{% url 'cat' category.slug %}">{{category.name}}</a></li>
-                        </ul>
-                    </div>
-                    {% endfor %}
-                </div>
-                </div>
+                {% for super_cat in super_categories %}
+                    <ul class="super-category">
+                        <li class="super-category">
+                        <img src="{{ super_cat.image.url }}" alt="" class="category-image">
+                            <p class="super-category">{{ super_cat.name }}</p>
+                            <ul class="category">
+                                {% for cat in categories %}
+                                    {% if cat.super_category == super_cat %}
+                                    <a href="{% url 'cat' cat.slug %}">
+                                        <li class="category">
+                                            {{ cat }}
+                                        </li>
+                                    </a>
+                                    {% endif %}
+                                {% endfor %}
+
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                {% endfor %}
             </nav>
+        </div>
         </div>
         <div class="col-2">
             <a href="{% url 'home' %}">
@@ -41,7 +56,7 @@
               <form action="" method="get">
               <input type="text" name="find" id="find">
               <div class="button">
-                <button type="submit" class="btn"></button>
+                <button type="submit" class="btn">ПОШУК</button>
               </div>
               </form>
             </div>
