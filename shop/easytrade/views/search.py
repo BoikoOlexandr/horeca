@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.db.models import Q
 
@@ -12,6 +12,8 @@ class SearchView(View, ViewMixIn):
     template_name = 'categories'
 
     def get(self, request):
+        if not request.GET.get('find'):
+            return redirect('home')
         self.set_pagination(request)
         self.set_menu()
         return render(request, self.get_path(), self.content)

@@ -71,6 +71,7 @@ header{
     color: white;
     background-color: var(--acsent-text-color);
     border-radius: 0;
+    font-weight: bold;
 }
 
 header form ::after{

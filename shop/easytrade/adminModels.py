@@ -11,3 +11,6 @@ class CategoriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('name', 'super_category')
     list_editable = ('super_category',)
+
+class BasketsAdmin(admin.ModelAdmin):
+    readonly_fields = ('orders',)

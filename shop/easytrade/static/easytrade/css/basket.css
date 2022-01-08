@@ -24,3 +24,27 @@ article.basket .order-list .order{
     padding: 2px;
     margin: 2px;
 }
+
+
+#basket input[type = 'text']{
+    display: block;
+    width: 100%;
+}
+
+#basket label{
+    color: black;
+    font-size: 1.25em;
+    padding: 5px;
+}
+#basket input{
+    display: block;
+}
+
+#basket input[type = 'submit']{
+    background: var(--acsent-text-color);
+    border: 0;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: auto;
+}

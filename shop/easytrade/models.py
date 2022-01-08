@@ -55,6 +55,10 @@ class Orders(models.Model):
 class Baskets(models.Model):
     status = models.CharField(max_length=50)
     orders = models.ManyToManyField('Orders')
+    address = models.CharField(max_length=400, default='')
+    description = models.CharField(max_length=400, default='')
+    telephone = models.CharField(max_length=15, default='')
+    user_name = models.CharField(max_length=20, default='')
 
     def __str__(self):
         return str(self.pk)
