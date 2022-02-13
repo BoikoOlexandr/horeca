@@ -1,0 +1,41 @@
+{% extends 'easytrade/base.html' %}
+{% block content %}
+
+    <article>
+        <div class="container">
+            <div class="trends">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>
+                            {{page_name}}
+                        </h1>
+                    </div>
+
+                     {% for item in good.object_list %}
+                    <a href="{% url 'good' item.slug %}" class="col-3">
+                        <div class="good">
+<!--                            <div class="special">Спеціальна пропозиція</div>-->
+                            <div class="image"><img src="{{ item.photo.url }}" alt=""></div>
+                            <p class="title">{{ item }}</p>
+                            <p class="price">{{ item.price }} грн.</p>
+                        </div>
+                    </a>
+
+
+                    {% endfor %}
+                    <nav class="pagination-button">
+                        <div class="d-flex flex-row justify-content-center">
+                            {% for page in pages %}
+                            {% if good.number == page %}
+                            <a  id="current-page" href="?page={{page}}&find={{page_name}}">{{page}}</a>
+                            {% elif page >= good.number|add:-2 and page <= good.number|add:2 %}
+                            <a href="?page={{page}}&find={{page_name}}">{{page}}</a>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

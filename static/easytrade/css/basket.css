@@ -1,0 +1,50 @@
+article.basket  .image{
+    text-align: center;
+}
+
+article.basket .image img{
+    max-height: 50px;
+    max-width: 50px;
+}
+article.basket .column{
+    height: 100%;
+}
+
+article.basket .column p{
+    margin: 0;
+    padding: 0;
+}
+article.basket .order-list{
+    border: 1px solid var(--main-text-color);
+    padding: 5px;
+}
+
+article.basket .order-list .order{
+    border: 1px solid black;
+    padding: 2px;
+    margin: 2px;
+}
+
+
+#basket input[type = 'text']{
+    display: block;
+    width: 100%;
+}
+
+#basket label{
+    color: black;
+    font-size: 1.25em;
+    padding: 5px;
+}
+#basket input{
+    display: block;
+}
+
+#basket input[type = 'submit']{
+    background: var(--acsent-text-color);
+    border: 0;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: auto;
+}

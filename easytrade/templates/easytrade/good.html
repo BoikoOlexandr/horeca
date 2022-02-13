@@ -1,0 +1,39 @@
+{% extends 'easytrade/base.html' %}
+{% block content %}
+
+  <article class="good">
+    <div class="container">
+      <h1>Название</h1>
+      <div class="row">
+        <div class="col-6">
+          <div class="photo">
+            <img src="{{ good.photo.url }}" alt="">
+          </div>
+        </div>
+        <div class="col-6">
+          <form action="{% url 'order' good.slug %}">
+          <div class="price-box">
+            <p class="price">
+              <spam id = 'prise'>{{ good.price }}</spam> hrn
+            </p>
+            <p>кількість</p>
+            <div id="minus" class="count-button">-</div>
+            <p id="countresult" class="count">
+              1
+            </p>
+            <input type="hidden" name="count" id="result" value="1">
+            <div id="plus" class="count-button">+</div>
+            <p class="sum">Вьсого: <span id="sum">{{ good.price }}</span> грн</p>
+            <input type="submit" value="Замовити" class="bth slider-item price-box-btn">
+          </div>
+          </form>
+        </div>
+      </div>
+      <h1>
+        Опис
+      </h1>
+      <p>{{ good.description }}</p>
+    </div>
+  </article>
+
+{% endblock %}
