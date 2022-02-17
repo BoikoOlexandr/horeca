@@ -14,9 +14,9 @@ class OrderView(View, ViewMixIn):
         good = Goods.objects.get(slug=slug)
         basket = request.session.get('basket', False) or []
         basket.append({
+            'old': False,
             'good': good.slug,
             'number_of_goods': request.GET['count']
         })
         request.session['basket'] = basket
-        self.content['good'] = good
         return redirect('home')

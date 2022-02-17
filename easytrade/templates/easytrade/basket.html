@@ -1,5 +1,6 @@
 
 {% extends 'easytrade/base.html' %}
+{% load static %}
 {% block content %}
      <article class="basket">
         <div class="container">
@@ -23,12 +24,22 @@
                                 </div>
                                 <div class="col-1">
                                     <div class="d-flex flex-column justify-content-center column">
-                                        <p class=""> {{ order.good.price }}</p>
+                                        <p class=""> {{ order.good.end_price }}</p>
                                     </div>
                                 </div>
                                 <div class="col-1">
                                     <div class="d-flex flex-column justify-content-center column">
                                         <p class=""> {{ order.number_of_goods }}</p>
+                                        <p class=""> {{ order.value }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <div class="d-flex flex-column justify-content-center column">
+                                        <form method="get">
+                                            <input type="hidden" name="delete" value="{{ order.pid }}">
+
+                                            <input type="submit" class="delete" style="background-image: url({%static 'easytrade/images/delete.png'%});width: 30px; background-size: 100%;background-repeat: no-repeat;" value="">
+                                        </form>
                                     </div>
                                 </div>
                             </div>

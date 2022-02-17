@@ -1,21 +1,22 @@
 import django.db.models as models
 from django_extensions.db.fields import AutoSlugField as autoSlugField
 
-
 class Goods(models.Model):
-    title = models.CharField(max_length=50)
-    code = models.CharField(max_length=50, default='')
-    search_queries = models.TextField(default='')
-    search_queries_ukr = models.TextField(default='')
-    price = models.FloatField()
+    title = models.CharField(max_length=100, verbose_name='Назва')
+    code = models.CharField(max_length=50, default='', verbose_name='Артикул старий')
+    articul = models.CharField(max_length=50, default='0', verbose_name='Артикул')
+    search_queries = models.TextField(default='', verbose_name='Пошукові запити')
+    search_queries_ukr = models.TextField(default='', verbose_name='Пошукові запити(укр)')
+    price = models.FloatField(verbose_name='"Чиста" ціна')
+    end_price = models.FloatField(default=0, verbose_name='Ціна')
     UID = models.CharField(max_length=50, default='')
     good_ID = models.CharField(max_length=50, default='')
-    description = models.TextField()
-    photo = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    description = models.TextField(verbose_name='Опис')
+    photo = models.FileField(upload_to='uploads/%Y/%m/%d/', verbose_name='Фото товару')
     created = models.DateTimeField(auto_now_add=True)
-    is_trend = models.BooleanField(default=False)
-    is_popular = models.BooleanField(default=False)
-    is_published = models.BooleanField(default=False)
+    is_trend = models.BooleanField(default=False, verbose_name='В тренди')
+    is_popular = models.BooleanField(default=False, verbose_name='В популярні')
+    is_published = models.BooleanField(default=False, verbose_name='Публікувати')
     slug = models.SlugField()
     goods_type = models.ForeignKey(
         'GoodTypes',
@@ -25,12 +26,14 @@ class Goods(models.Model):
     measure = models.ForeignKey(
         'Measure',
         on_delete=models.CASCADE,
-        default=1
+        default=1,
+        verbose_name='Одиниці виміру'
     )
     category = models.ForeignKey(
         'Categories',
         on_delete=models.CASCADE,
-        default=1
+        default=1,
+        verbose_name='Категорія'
     )
 
     def __str__(self):

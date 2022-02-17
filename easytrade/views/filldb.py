@@ -1,4 +1,5 @@
 import os.path
+import random
 
 import django.db.models as models
 from django.db import IntegrityError
@@ -13,10 +14,14 @@ from easytrade.views.ViewMixIn import ViewMixIn
 from shop.settings import MEDIA_ROOT
 from django.template.defaultfilters import slugify as django_slugify
 
+from shop import settings
+
 alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
             'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
             'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ы': 'i', 'э': 'e', 'ю': 'yu',
             'я': 'ya'}
+
+
 def slugify(s):
     """
     Overriding django slugify that allows to use russian words as well.
@@ -28,8 +33,20 @@ class FillDb(View, ViewMixIn):
     template_name = 'filldb'
 
     def get(self, request):
+
         self.set_menu()
         self.content['form'] = UploadFileForm()
+        self.content['premium'] = settings.PREMIUM
+        self.content['phone'] = settings.PHONE
+        premium = request.GET.get('premium')
+        phone = request.GET.get('phone')
+        articul = request.GET.get('articul')
+        if premium:
+            self.change_price(premium)
+        if phone:
+            self.change_phone(phone)
+        if articul:
+            self.change_articul()
         return render(request, self.get_path(), self.content)
 
     def post(self, request):
@@ -74,9 +91,12 @@ class FillDb(View, ViewMixIn):
             result[good.code] = []
             good.title = sheet.cell(row=row, column=2).value
             result[good.code].append(good.title)
-            good.search_queries = sheet.cell(row=row, column=4).value or self.set_empty_field('search_queries', result[good.code])
-            good.search_queries_ukr = sheet.cell(row=row, column=5).value or self.set_empty_field('search_queries_ukr', result[good.code])
-            good.description = sheet.cell(row=row, column=7).value or self.set_empty_field('description', result[good.code])
+            good.search_queries = sheet.cell(row=row, column=4).value or self.set_empty_field('search_queries',
+                                                                                              result[good.code])
+            good.search_queries_ukr = sheet.cell(row=row, column=5).value or self.set_empty_field('search_queries_ukr',
+                                                                                                  result[good.code])
+            good.description = sheet.cell(row=row, column=7).value or self.set_empty_field('description',
+                                                                                           result[good.code])
             good.goods_type = self.forigenValue(sheet.cell(row=row, column=8).value, GoodTypes)
             good.price = self.validate_float(sheet.cell(row=row, column=9).value, result[good.code])
             good.measure = self.forigenValue(sheet.cell(row=row, column=11).value, Measure)
@@ -104,7 +124,7 @@ class FillDb(View, ViewMixIn):
             instance.save()
         return instance
 
-    def validate_float(self, string: str, result:list) -> float:
+    def validate_float(self, string: str, result: list) -> float:
         if string:
             string = string.replace(',', '.')
         else:
@@ -112,7 +132,31 @@ class FillDb(View, ViewMixIn):
             result.append('prise hes no value')
         return float(string)
 
-    def set_empty_field(self, field, result:list):
+    def set_empty_field(self, field, result: list):
         result.append(f'{field} hes no value')
         return '0'
 
+    def change_price(self, premium):
+        self.content['change_price'] = []
+        try:
+            premium = float(premium.replace(',', '.'))
+            if premium <= 0:
+                raise ValueError
+        except ValueError:
+            self.content['change_price'].append(f"Не можу розпізнати ціну {premium}")
+        else:
+            settings.PREMIUM = premium
+            for good in Goods.objects.all():
+                good.end_price = round(good.price * (premium / 100 + 1), 2)
+                good.save()
+                self.content['change_price'].append(f"{good} has new price {good.end_price}")
+
+    def change_phone(self, phone: str):
+        settings.PHONE = phone
+
+    def change_articul(self):
+        self.content['change_articul'] = []
+        for good in Goods.objects.all():
+            good.articul = good.code + str(random.randint(10, 99))
+            good.save()
+            self.content['change_articul'].append(f"{good} has new articul {good.articul}")

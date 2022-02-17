@@ -6,6 +6,7 @@ a{
     --main-text-color: #a7a7a7;
     --acsent-text-color: #F7B70B;
     --background-main-color: #221F1F;
+    --menu-image-size: 25px;
 }
 
 *{
@@ -45,6 +46,7 @@ i.icon{
 }
 
 header{
+
     position: fixed;
     width: 100%;
     height: 60px;

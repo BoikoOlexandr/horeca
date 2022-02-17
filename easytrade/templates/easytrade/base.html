@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'easytrade/css/good.css' %}"  >
     <link rel="stylesheet" href="{% static 'easytrade/css/basket.css' %}"  >
     <link rel="stylesheet" href="{% static 'easytrade/css/slider.css' %}"  >
+    <link rel="stylesheet" href="{% static 'easytrade/css/nav.css' %}"  >
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
@@ -18,32 +19,10 @@
 
         <div class="col-1">
            <div class="col-1">
-            <nav id="slow_nav">
+            <a href="{% url 'home' %}">
                 <img src="{% static 'easytrade/images/menu.png' %}" class="menu" alt="">
-                {% for super_cat in super_categories %}
-                    <ul class="super-category">
-                        <li class="super-category">
-                        <img src="{{ super_cat.image.url }}" alt="" class="category-image">
-                            <p class="super-category">{{ super_cat.name }}</p>
-                            <ul class="category">
-                                {% for cat in categories %}
-                                    {% if cat.super_category == super_cat %}
-                                    <a href="{% url 'cat' cat.slug %}">
-                                        <li class="category">
-                                            {{ cat }}
-                                        </li>
-                                    </a>
-                                    {% endif %}
-                                {% endfor %}
-
-
-                            </ul>
-                        </li>
-
-                    </ul>
-                {% endfor %}
-            </nav>
-        </div>
+            </a>
+            </div>
         </div>
         <div class="col-2">
             <a href="{% url 'home' %}">
@@ -78,10 +57,44 @@
       </div>
     </div>
   </header>
+  <div class="container-fluid">
+      <div class="row">
+          <div  class="col-2" id="main-nav">
+              <nav>
+                  {% for super_cat in super_categories %}
+                   <li class="super-category">
+                       <div class="row">
+                           <div class="col-1">
+                               <img src="{{ super_cat.image.url }}" alt="" class="category-image">
+                           </div>
+                           <div class="col-11">
+                               <p class="super-category">{{ super_cat.name }}</p>
+                           </div>
+                       </div>
+                            <ul class="category">
+                                {% for cat in categories %}
+                                    {% if cat.super_category == super_cat %}
+                                    <a href="{% url 'cat' cat.slug %}">
+                                        <li class="category">
+                                            {{ cat }}
+                                        </li>
+                                    </a>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                    {% endfor %}
 
-    {% block content %}
-    {% endblock %}
-    <footer>
+
+                        </li>
+              </nav>
+          </div>
+          <div class="col-10">
+              {% block content %}
+              {% endblock %}
+          </div>
+      </div>
+  </div>
+  <footer>
 
         <div class="container">
             <row>
@@ -89,7 +102,7 @@
                     <h3 class="acsent-color bold">Магазин</h3>
                     <p>Персональний розділ</p>
                     <p><i class='far fa-clock icon'></i> Час роботи: Пн-Пт: 09.00 - 17.00</p>
-                    <p><i class='fas fa-mobile-alt icon'></i> Телефон: +38 067-89-88-077</p>
+                    <p><i class='fas fa-mobile-alt icon'></i> Телефон: {{ footer_phone }}</p>
                 </div>
                 <div class="col-2">
 

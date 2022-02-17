@@ -12,5 +12,6 @@ class CategoriesAdmin(admin.ModelAdmin):
     list_display = ('name', 'super_category')
     list_editable = ('super_category',)
 
+
 class BasketsAdmin(admin.ModelAdmin):
     readonly_fields = ('orders',)

@@ -13,30 +13,25 @@ class BasketView(View, ViewMixIn):
     order = Orders()
 
     def get(self, request):
-        if request.GET.get('save'):
-            self.save_basket(request.GET)
-            self.content['basket'] = []
-            request.session['basket'] = []
-        else:
-            for item in request.session.get('basket', []):
-                order = Orders()
-                order.good = Goods.objects.get(slug=item['good'])
-                order.number_of_goods = int(item['number_of_goods'])
-                request.session['basket'] = []
-                order.save()
-                self.basket.append(order)
-            self.content['basket'] = self.basket
-        self.set_menu()
+        self.basket = request.session.get('basket', [])
+        if self.basket:
+            self.delete(int(request.GET.get('delete', -1)), request)
+            self.format_basket()
+
+        self.content['basket'] = self.basket
         return render(request, self.get_path(), self.content)
 
-    def save_basket(self, get):
-        basket = Baskets()
-        basket.telephone = get.get('telephone')
-        basket.description = get.get('description') or ''
-        basket.address = get.get('address')
-        print(get)
-        basket.save()
-        for order in self.basket:
-            basket.orders.add(order)
 
-        basket.save()
+    def format_basket(self):
+        for pid, item in enumerate(self.basket):
+            item['pid'] = pid
+            print(item)
+            if not item['old']:
+                item['good'] = Goods.objects.get(slug=item['good'])
+                item['value'] = item['good'].end_price * float(item['number_of_goods'])
+
+    def delete(self, item, session):
+        if item == -1:
+            return 0
+        del self.basket[item]
+        del session.session['basket'][item]

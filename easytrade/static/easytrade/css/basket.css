@@ -48,3 +48,9 @@ article.basket .order-list .order{
     border-radius: 10px;
     margin: auto;
 }
+
+#basket .order input[type = 'submit']{
+    width: 30px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
